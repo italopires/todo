@@ -7,7 +7,8 @@ defmodule TodoAppWeb.TaskController do
   action_fallback TodoAppWeb.FallbackController
 
   def index(conn, _params) do
-    tasks = Todo.list_tasks()
+    user = Guardian.Plug.current_resource(conn)
+    tasks = Todo.list_tasks_by_user(user.id)
     render(conn, :index, tasks: tasks)
   end
 
@@ -26,13 +27,17 @@ defmodule TodoAppWeb.TaskController do
 
   def show(conn, %{"id" => id}) do
     task = Todo.get_task!(id)
-    render(conn, :show, task: task)
+
+    with :ok <- authorize_user!(conn, task) do
+      render(conn, :show, task: task)
+    end
   end
 
   def update(conn, %{"id" => id, "task" => task_params}) do
     task = Todo.get_task!(id)
 
-    with {:ok, %Task{} = task} <- Todo.update_task(task, task_params) do
+    with :ok <- authorize_user!(conn, task),
+      {:ok, _task} <- Todo.update_task(task, task_params) do
       render(conn, :show, task: task)
     end
   end
@@ -40,8 +45,22 @@ defmodule TodoAppWeb.TaskController do
   def delete(conn, %{"id" => id}) do
     task = Todo.get_task!(id)
 
-    with {:ok, %Task{}} <- Todo.delete_task(task) do
+    with :ok <- authorize_user!(conn, task),
+      {:ok, _task} <- Todo.delete_task(task) do
       send_resp(conn, :no_content, "")
+    end
+  end
+
+  defp authorize_user!(conn, %Task{user_id: user_id}) do
+    current_user = Guardian.Plug.current_resource(conn)
+
+    if user_id == current_user.id do
+      :ok
+    else
+      conn
+      |> put_status(:forbidden)
+      |> json(%{error: "You are not authorized."})
+      |> halt()
     end
   end
 end

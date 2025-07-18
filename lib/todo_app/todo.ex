@@ -21,6 +21,13 @@ defmodule TodoApp.Todo do
     Repo.all(Task)
   end
 
+  def list_tasks_by_user(user_id) do
+    import Ecto.Query, only: [from: 2]
+
+    from(t in Task, where: t.user_id == ^user_id)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single task.
 
