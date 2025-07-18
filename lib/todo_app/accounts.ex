@@ -5,8 +5,8 @@ defmodule TodoApp.Accounts do
 
   import Ecto.Query, warn: false
   alias TodoApp.Repo
-
   alias TodoApp.Accounts.User
+  import Bcrypt, only: [verify_pass: 2]
 
   @doc """
   Returns the list of users.
@@ -19,6 +19,21 @@ defmodule TodoApp.Accounts do
   """
   def list_users do
     Repo.all(User)
+  end
+
+  def authenticate_user(email, password) do
+    user = Repo.get_by(User, email: email)
+
+    cond do
+      user && verify_pass(password, user.password_hash) ->
+        {:ok, user}
+
+      user ->
+        {:error, :invalid_password}
+
+      true ->
+        {:error, :user_not_found}
+    end
   end
 
   @doc """

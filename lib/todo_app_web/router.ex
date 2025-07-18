@@ -20,6 +20,12 @@ defmodule TodoAppWeb.Router do
     get "/", PageController, :home
   end
 
+  scope "/v1", TodoAppWeb do
+    pipe_through :api
+
+    post "/login", SessionController, :login
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", TodoAppWeb do
   #   pipe_through :api
