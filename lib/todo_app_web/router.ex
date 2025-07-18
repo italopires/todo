@@ -21,9 +21,10 @@ defmodule TodoAppWeb.Router do
   end
 
   scope "/v1", TodoAppWeb do
-    pipe_through :api
+    pipe_through [:api, TodoAppWeb.Auth.Pipeline]
 
     post "/login", SessionController, :login
+    resources "/tasks", TaskController, except: [:new, :edit]
   end
 
   # Other scopes may use custom stacks.
