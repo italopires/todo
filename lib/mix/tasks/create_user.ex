@@ -1,4 +1,3 @@
-# lib/mix/tasks/create_user.ex
 defmodule Mix.Tasks.CreateUser do
   use Mix.Task
 
@@ -7,8 +6,8 @@ defmodule Mix.Tasks.CreateUser do
   def run(_) do
     Mix.Task.run("app.start")
 
-    email = prompt("Email")
-    password = prompt("Password")
+    email = "teste_user@todo.com"
+    password = "teste_user"
 
     create_user(email, password)
   end
@@ -25,15 +24,11 @@ defmodule Mix.Tasks.CreateUser do
 
     case Accounts.create_user(params) do
       {:ok, user} ->
-        Mix.shell().info("✅ User created successfully: #{user.email}")
+        Mix.shell().info("User created successfully: #{user.email}")
 
       {:error, changeset} ->
-        Mix.shell().error("❌ Failed to create user:")
+        Mix.shell().error("Failed to create user:")
         IO.inspect(changeset.errors)
     end
-  end
-
-  defp prompt(label) do
-    IO.gets("#{label}: ") |> String.trim()
   end
 end
