@@ -15,7 +15,7 @@ defmodule TodoAppWeb.TaskController do
     with {:ok, %Task{} = task} <- Todo.create_task(task_params) do
       conn
       |> put_status(:created)
-      |> put_resp_header("location", ~p"/api/tasks/#{task}")
+      |> put_resp_header("location", "/api/tasks/#{task.id}")
       |> render(:show, task: task)
     end
   end
