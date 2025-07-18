@@ -12,6 +12,10 @@ defmodule TodoAppWeb.TaskController do
   end
 
   def create(conn, %{"task" => task_params}) do
+    user = Guardian.Plug.current_resource(conn)
+
+    task_params = Map.put(task_params, "user_id", user.id)
+
     with {:ok, %Task{} = task} <- Todo.create_task(task_params) do
       conn
       |> put_status(:created)
