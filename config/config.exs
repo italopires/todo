@@ -31,6 +31,10 @@ config :todo_app, TodoAppWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :todo_app, TodoApp.Mailer, adapter: Swoosh.Adapters.Local
 
+config :todo_app, TodoApp.Auth.Guardian,
+  issuer: "todo_app",
+  secret_key: "T1Ssdvm1jhme7sEryzZifSHbNC3HqWEMcs+ouofRPJ/J77Yu79jy+poH+fWVz6Vb"
+
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
