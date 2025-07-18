@@ -19,7 +19,8 @@ defmodule TodoAppWeb.TaskJSON do
     %{
       id: task.id,
       title: task.title,
-      body: task.body
+      body: task.body,
+      user_id: task.user_id
     }
   end
 end
