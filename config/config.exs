@@ -7,6 +7,8 @@
 # General application configuration
 import Config
 
+config :inertia, endpoint: TodoAppWeb.Endpoint
+
 config :todo_app,
   ecto_repos: [TodoApp.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true]
@@ -37,10 +39,10 @@ config :todo_app, TodoApp.Auth.Guardian,
 
 # Configure esbuild (the version is required)
 config :esbuild,
-  version: "0.17.11",
+  version: "0.21.5",
   todo_app: [
     args:
-      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+      ~w(js/app.jsx --bundle --chunk-names=chunks/[name]-[hash] --splitting --format=esm  --target=es2020 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
