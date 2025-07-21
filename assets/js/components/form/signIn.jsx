@@ -35,39 +35,34 @@ export default function FormSignIn() {
   }
 
   return (
-    <div className='card w-50'>
-      <div className='card-body'>
-        <h1 className='text-center fw-bold'>Sign In</h1>
-        <h3 className='text-center text-secondary mb-3'>Fill your credentials</h3>
+    <div>
+      <h1>Sign In</h1>
+      <h3>Fill your credentials</h3>
 
-        {messageError ? (
-          <p className='fs-5 text-center text-danger'>{messageError}</p>
-        ) : null}
+      {messageError ? (
+        <p>{messageError}</p>
+      ) : null}
 
-        <div className='mb-3'>
-          <label htmlFor='signInEmail' className='form-label fw-bold'>Email</label>
-          <input
-            type='email'
-            className='form-control'
-            id='signInEmail'
-            onChange={(event) => setEmail(event.target.value)} />
-        </div>
+      <div>
+        <label htmlFor='signInEmail'>Email</label>
+        <input
+          type='email'
+          id='signInEmail'
+          onChange={(event) => setEmail(event.target.value)} />
+      </div>
 
-        <div className='mb-3'>
-          <label htmlFor='signInPassword' className='form-label fw-bold'>Password</label>
-          <input
-            type='password'
-            className='form-control'
-            id='signInPassword'
-            onChange={(event) => setPassword(event.target.value)} />
-        </div>
+      <div>
+        <label htmlFor='signInPassword'>Password</label>
+        <input
+          type='password'
+          id='signInPassword'
+          onChange={(event) => setPassword(event.target.value)} />
+      </div>
 
-        <div className='mb-3 d-flex justify-content-center'>
-          <button
-            type='button'
-            className='btn btn-primary fw-bold w-50'
-            onClick={handleSignIn}>Sign In</button>
-        </div>
+      <div>
+        <button
+          type='button'
+          onClick={handleSignIn}>Sign In</button>
       </div>
     </div>
   )

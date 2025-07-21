@@ -67,27 +67,25 @@ export default function FormTask({
   return (
     <>
       {messageError ? (
-        <p className='fs-5 text-center text-danger'>{messageError}</p>
+        <p>{messageError}</p>
       ) : null}
 
-      <div className='row'>
-        <div className='col-12'>
-          <div className='mb-3'>
-            <label htmlFor='taskTitle' className='form-label fw-bold'>Title</label>
+      <div>
+        <div>
+          <div>
+            <label htmlFor='taskTitle'>Title</label>
             <input
               type='text'
-              className='form-control'
               id='taskTitle'
               onChange={(event) => setTitle(event.target.value)}
               value={title} />
           </div>
         </div>
 
-        <div className='col-12'>
-          <div className='mb-3'>
-            <label htmlFor='taskBody' className='form-label fw-bold'>Body</label>
+        <div>
+          <div>
+            <label htmlFor='taskBody'>Body</label>
             <textarea
-              className='form-control'
               id='taskBody'
               onChange={(event) => setBody(event.target.value)}
               value={body}></textarea>
@@ -95,18 +93,14 @@ export default function FormTask({
         </div>
       </div>
 
-      <div className='row'>
-        <div className='col-12'>
-          <button
-            type='button'
-            className='btn btn-primary fw-bold mb-3 me-3'
-            onClick={handleSaveTask}>Save</button>
-          <button
-            type='button'
-            className='btn btn-primary fw-bold mb-3 me-3'
-            disabled={title === '' && body === ''}
-            onClick={handleClearForm}>Clear</button>
-        </div>
+      <div>
+        <button
+          type='button'
+          onClick={handleSaveTask}>Save</button>
+        <button
+          type='button'
+          disabled={title === '' && body === ''}
+          onClick={handleClearForm}>Clear</button>
       </div>
     </>
   )

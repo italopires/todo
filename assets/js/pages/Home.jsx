@@ -35,10 +35,10 @@ export default function Tasks() {
   }
 
   return (
-    <main className='container'>
-      <div className='row'>
-        <div className='col-12'>
-          <h1 className='text-center fw-bold my-4'>Tasks</h1>
+    <main >
+      <div>
+        <div>
+          <h1>Tasks</h1>
         </div>
       </div>
 
@@ -55,12 +55,12 @@ export default function Tasks() {
         setMessageError={setMessageError}
         token={token} />
 
-      <div className='row'>
-        <div className='col-12 mb-3'>
-          <h1 className='fw-bold my-4'>List</h1>
+      <div>
+        <div>
+          <h1>List</h1>
         </div>
 
-        <div className='col-12'>
+        <div>
           <ListTasks
             tasks={tasks}
             setTasks={setTasks}

@@ -34,21 +34,19 @@ export default function ListTasks({
   }
 
   return tasks.length === 0 ? (
-    <p className='fs-4 text-center'>No data</p>
+    <p>No data</p>
   ) : tasks.map((task) => (
-    <div key={task.id} className='card mb-3'>
-      <div className='card-body'>
-        <h5 className='card-title fw-bold'>{task.title}</h5>
-        <p className='card-text'>{task.body}</p>
+    <div key={task.id}>
+      <div>
+        <h5>{task.title}</h5>
+        <p>{task.body}</p>
       </div>
-      <div className='card-footer'>
+      <div>
         <button
           type='button'
-          className='btn btn-outline-info btn-sm fw-bold me-3'
           onClick={() => loadTask(task)}>Edit</button>
         <button
           type='button'
-          className='btn btn-outline-danger btn-sm fw-bold'
           onClick={() => handleDeleteTask(task.id)}>Delete</button>
       </div>
     </div>
