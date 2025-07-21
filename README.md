@@ -1,18 +1,49 @@
-# TodoApp
+TodoApp is a development-ready Elixir Phoenix application with a **React + Inertia.js frontend**, bundled for hot reload using Docker.
 
-To start your Phoenix server:
+## 🚀 Getting Started (Dockerized Dev Environment)
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+To run the application locally, you’ll need:
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [Docker Compose](https://docs.docker.com/compose/)
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+> 💡 You do **not** need to install Elixir, Node.js, or PostgreSQL on your machine.
 
-## Learn more
+---
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+### ▶️ Running the App
+
+1. **Clone the repository**
+
+   ```bash
+   git clone https://github.com/your-username/todo_app.git
+   cd todo_app
+   ```
+
+2. **Start the containers (build included)**
+
+   ```bash
+   docker-compose up --build
+   ```
+
+3. Access the app in your browser:
+
+   [http://localhost:4000](http://localhost:4000)
+
+---
+
+### 🔁 What happens automatically?
+
+- Installs all Elixir and Node.js dependencies
+- Runs database migrations
+- Seeds the database (including creation of a default user)
+- Launches Phoenix with live reload for both backend and frontend
+
+---
+
+### 👤 Default User (for testing)
+
+The first user is automatically created on startup:
+
+- **Email:** `teste_user@todo.com`
+- **Password:** `teste_user`

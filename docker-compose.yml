@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todo_app_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: sh -c "mix deps.get && mix ecto.setup && mix create_user && mix phx.server"
+    ports:
+      - "4000:4000"
+    environment:
+      - MIX_ENV=dev
+      - DATABASE_URL=ecto://postgres:password@db/todo_app_dev
+      - DB_HOST=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - PGHOST=db
+      - PGPORT=5432
+      - PGDATABASE=todo_app_dev
+      - SECRET_KEY_BASE=dummy
+      - PHOENIX_HOST=localhost
+    volumes:
+      - .:/app
+      - /app/deps
+      - /app/_build
+      # - /app/assets/node_modules
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
