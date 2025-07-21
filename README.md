@@ -16,8 +16,8 @@ To run the application locally, you’ll need:
 1. **Clone the repository**
 
    ```bash
-   git clone https://github.com/your-username/todo_app.git
-   cd todo_app
+   git clone https://github.com/italopires/todo.git
+   cd todo
    ```
 
 2. **Start the containers (build included)**
