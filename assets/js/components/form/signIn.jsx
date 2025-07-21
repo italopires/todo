@@ -1,14 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useState } from 'react'
+import { router } from '@inertiajs/react'
 import { useAuth } from '../../context/auth'
 
 export default function FormSignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [messageError, setMessageError] = useState('')
-  const router = useRouter()
   const { setToken } = useAuth()
 
   const handleSignIn = () => {
@@ -29,7 +28,7 @@ export default function FormSignIn() {
           setMessageError(result.error);
         } else {
           setToken(result.token)
-          router.push('/tasks');
+          router.visit('/');
         }
       })
     }
@@ -39,7 +38,7 @@ export default function FormSignIn() {
     <div className='card w-50'>
       <div className='card-body'>
         <h1 className='text-center fw-bold'>Sign In</h1>
-        <h3 className='text-center text-secondary mb-3'>Entre com suas credênciais de acesso</h3>
+        <h3 className='text-center text-secondary mb-3'>Fill your credentials</h3>
 
         {messageError ? (
           <p className='fs-5 text-center text-danger'>{messageError}</p>

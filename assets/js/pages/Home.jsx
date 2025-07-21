@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import FormTask from '../components/form/task'
 import ListTasks from '../components/listTasks'
 import { useAuth } from '../context/auth'
+import { router } from '@inertiajs/react'
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([])
@@ -14,16 +15,24 @@ export default function Tasks() {
   const { token } = useAuth()
 
   useEffect(() => {
-    fetch('/v1/tasks', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-        }
-      }).then(async (res) => {
-      const data = (await res.json()).data
-      setTasks(data)
-    })
-  }, [])
+    if (token) {
+      fetch('/v1/tasks', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          }
+        }).then(async (res) => {
+        const data = (await res.json()).data
+        setTasks(data)
+      })
+    } else {
+      router.visit('/sign-in')
+    }
+  }, [token])
+
+  if (!token) {
+    return null;
+  }
 
   return (
     <main className='container'>

@@ -1,14 +1,12 @@
 import React from "react";
-// import axios from "axios";
 
 import { createInertiaApp } from "@inertiajs/react";
 import { createRoot } from "react-dom/client";
 import { AuthProvider } from "./context/auth";
 
-// axios.defaults.xsrfHeaderName = "x-csrf-token";
-
 const pages = {
   './pages/Home.jsx': () => import('./pages/Home.jsx'),
+  './pages/SignIn.jsx': () => import('./pages/SignIn.jsx'),
 };
 createInertiaApp({
   resolve: async (name) => {

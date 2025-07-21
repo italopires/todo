@@ -19,6 +19,7 @@ defmodule TodoAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+    get "/sign-in", PageController, :sign_in
   end
 
   scope "/v1", TodoAppWeb do
