@@ -37,8 +37,8 @@ defmodule TodoAppWeb.TaskController do
     task = Todo.get_task!(id)
 
     with :ok <- authorize_user!(conn, task),
-      {:ok, _task} <- Todo.update_task(task, task_params) do
-      render(conn, :show, task: task)
+      {:ok, updated_task} <- Todo.update_task(task, task_params) do
+      render(conn, :show, task: updated_task)
     end
   end
 
